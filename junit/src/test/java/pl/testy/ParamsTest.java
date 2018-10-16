@@ -14,22 +14,22 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ParamsTest {
 
     @ParameterizedTest
-    @ValueSource(ints = {1,8,3})
-    public void metoda1(int number){
-        assertTrue(number < 5);
+    @ValueSource(ints = {1, 8, 3})
+    public void metoda1(int number) {
+        assertTrue(number < 10);
 //
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"hello","world"})
-    public void metoda2(String str){
-        assertTrue(str.endsWith("ld"));
+    @ValueSource(strings = {"hellod", "world"})
+    public void metoda2(String str) {
+        assertTrue(str.endsWith("d"));
 //
     }
 
     @ParameterizedTest
-    @CsvSource(delimiter = ',',value = {"Hello, 1", "Hworld, 2", "'Hhahaha,haha', 43"})
-    public void metoda3(String param1, int param2){
+    @CsvSource(delimiter = ',', value = {"Hello, 1", "Hworld, 2", "'Hhahaha,haha', 43"})
+    public void testmetoda3Test(String param1, int param2) {
         assertTrue(param1.startsWith("H"));
         assertTrue(param2 < 44);
 //
@@ -37,14 +37,14 @@ public class ParamsTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/plikZDanymi.csv", delimiter = ',')
-    public void metoda4(String param1, int param2){
+    public void metoda4(String param1, int param2) {
         assertTrue(param1.startsWith("H"));
         assertTrue(param2 < 44);
 //
     }
 
     @Test
-    public void metoda5Exc(){
+    public void metoda5Exc() {
         assertThrows(IllegalArgumentException.class,
                 () -> GamePlay.play(0));
     }
