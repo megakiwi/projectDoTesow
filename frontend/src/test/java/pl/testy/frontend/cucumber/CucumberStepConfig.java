@@ -20,7 +20,8 @@ public class CucumberStepConfig {
 
     public WebDriver driver = null;
     public String baseUrl;
-    //    private boolean acceptNextAlert = true;
+    // tego prawdopodobnie nie trzeba
+    // to jest bo niby gdzie logger cucumbera zwraca błędy, i nie pamietamy po co to tu wgl jest.
     private StringBuffer verificationErrors = new StringBuffer();
     public String id = "0";
 
@@ -65,9 +66,9 @@ public class CucumberStepConfig {
         String verificationErrorString = verificationErrors.toString();
         if (!"".equals(verificationErrorString)) {
             fail(verificationErrorString);
-            driver.quit();
-            driver = null;
-            driver.close();
         }
+
+        driver.quit();
+        driver = null;
     }
 }
