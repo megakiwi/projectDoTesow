@@ -1,4 +1,4 @@
-package pl.testy.frontend;
+package pl.testy.frontend.cucumber;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
