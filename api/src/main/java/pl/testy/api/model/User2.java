@@ -7,5 +7,11 @@ public class User2 {
 
     public String surname;
 
+    public User2() {
+    }
 
+    public User2(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
 }

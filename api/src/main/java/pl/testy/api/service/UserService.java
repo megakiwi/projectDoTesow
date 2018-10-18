@@ -2,6 +2,7 @@ package pl.testy.api.service;
 
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import pl.testy.api.model.User;
 import pl.testy.api.model.User2;
 import pl.testy.api.specification.Specification;
@@ -69,6 +70,29 @@ public class UserService {
                 .extract()
                 .body()
                 .as(User [].class));
+    }
+
+    public static String [] postUser2(User2 user) {
+        return RestAssured.given()
+                .spec(Specification.requestSpecBuilder())
+                .body(user)
+                .post("5a690a1b2e000051007a73cb")
+                .andReturn()
+                .then()
+                .assertThat()
+                .statusCode(201)
+                .extract()
+                .body()
+                .as(String [].class);
+    }
+
+    public static Response getGeneric() {
+        return RestAssured.given()
+                .spec(Specification.requestSpecBuilder())
+                .when()
+                .get("/5b05bf3f3200007100ebfa04")
+                .andReturn();
+
     }
 
 }
