@@ -9,6 +9,7 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pl.testy.api.dbservice.UserDao;
+import pl.testy.api.jdbiservice.UserJdbiService;
 import pl.testy.api.model.*;
 import pl.testy.api.service.UserService;
 import pl.testy.api.specification.Specification;
@@ -91,7 +92,7 @@ public class ApiTest {
     @DisplayName("4ty test")
     public void _4Test() {
 //albo tak aby tak
-        // User2 user = UserService.getMyUser();
+        // User2 user = UserJdbiService.getMyUser();
         User2 user = UserService.getUser2Response();
         assertThat(user.name, equalTo("Piotr"));
         assertThat(user.surname, equalTo("Kowalski"));
@@ -203,5 +204,11 @@ public class ApiTest {
         });
     }
 
+
+    @Test
+    @DisplayName("jdbi await")
+    public void _jdbiTest()  {
+      assertThat(UserJdbiService.getTestUser(1L).getId(), is(1L));
+    }
 
 }

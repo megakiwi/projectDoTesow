@@ -12,7 +12,7 @@ import java.util.List;
 public class UserDao {
 
     public static UserDb getfindById(int id){
-        String sql = " select * from usertest where id =1";
+        String sql = " select * from usertest where id =" + id;
         UserDb user = new UserDb();
         Statement stat = null;
         try {
