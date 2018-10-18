@@ -5,6 +5,7 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import pl.testy.api.model.User;
 import pl.testy.api.model.User2;
+import pl.testy.api.model.UserAzure;
 import pl.testy.api.specification.Specification;
 
 import java.util.Arrays;
@@ -86,12 +87,30 @@ public class UserService {
                 .as(String [].class);
     }
 
-    public static Response getGeneric() {
+
+    //jeden url zwraca stringa, a inny intigera
+    public static Response getGeneric(String url) {
         return RestAssured.given()
                 .spec(Specification.requestSpecBuilder())
                 .when()
-                .get("/5b05bf3f3200007100ebfa04")
+                .get(url)
                 .andReturn();
+
+    }
+
+
+    public static UserAzure getUserAzureById(long id) {
+        return RestAssured.given()
+                .spec(Specification.fakeAzurSpecBuilder())
+                .when()
+                .get("/api/Users/{id}", id)
+                .andReturn()
+                .then()
+                .assertThat()
+                .statusCode(200)
+                .extract()
+                .body()
+                .as(UserAzure.class);
 
     }
 

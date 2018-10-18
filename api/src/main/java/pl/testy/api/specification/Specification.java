@@ -14,4 +14,21 @@ public class Specification {
                 .setBasePath("v2/").build();
 
     }
+
+    public static RequestSpecification requestSpecBuilderAuth(){
+        return new RequestSpecBuilder()
+                .addHeader("Aithorise", "Apikey, lolik")
+                .setContentType(ContentType.JSON)
+                .setBaseUri(Configuration.URL)
+                .setBasePath("v2/").build();
+
+    }
+
+    public static RequestSpecification fakeAzurSpecBuilder(){
+        return new RequestSpecBuilder()
+                .setContentType(ContentType.JSON)
+                .setBaseUri("http://fakerestapi.azurewebsites.net")
+                .build();
+
+    }
 }

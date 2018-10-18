@@ -8,10 +8,8 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import pl.testy.api.model.ErrorResponse;
-import pl.testy.api.model.User;
-import pl.testy.api.model.User2;
-import pl.testy.api.model.UserGeneric;
+import pl.testy.api.dbservice.UserDao;
+import pl.testy.api.model.*;
 import pl.testy.api.service.UserService;
 import pl.testy.api.specification.Specification;
 
@@ -20,6 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
+import static org.awaitility.Awaitility.await;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.core.Is.is;
@@ -133,9 +132,9 @@ public class ApiTest {
     }
 
     @Test
-    @DisplayName("7ty generic")
-    public void _7GenercicTest() throws IOException {
-        Response response = UserService.getGeneric();
+    @DisplayName("7ty generic integer")
+    public void _7GenercicIntegerTest() throws IOException {
+        Response response = UserService.getGeneric("/5b05bf3f3200007100ebfa04");
 
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -146,5 +145,63 @@ public class ApiTest {
         );
         assertThat(user.id, is(1));
     }
+
+
+    @Test
+    @DisplayName("7ty generic string")
+    public void _7GenercicStringTest() throws IOException {
+        Response response = UserService.getGeneric("/5b05c83e3200009700ebfa2b");
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        UserGeneric<String> user = objectMapper.readValue(
+                response.then().extract().body().asInputStream(),
+                new TypeReference<UserGeneric<String>>() {
+                }
+        );
+        assertThat(user.id, equalTo("1a"));
+    }
+
+
+    @Test
+    @DisplayName("8ty user azure")
+    public void _8UserAzureTest() throws IOException {
+        UserAzure user = UserService.getUserAzureById(1);
+
+        assertThat(user.id, is(1));
+        assertThat(user.userName, equalTo("User 1"));
+        assertThat(user.password, equalTo("Password1"));
+    }
+
+
+
+    @Test
+    @DisplayName("db 1")
+    public void _1DBTest() throws IOException {
+        UserDb user = UserDao.getfindById(1);
+
+        List<UserDb> userList = UserDao.getAll();
+
+
+ // testy poniższe dzialaja, tylko  kometujemy bo mamy juz usera o takim userze
+       // UserDao.saveOne(new UserDb(6,"sdfgfgg", "dfdgfd"));
+
+
+        UserDao.update(new UserDb(4,"sdfgfggUpdated", "dfdgfd"),4);
+
+    }
+
+
+
+    @Test
+    @DisplayName("db await")
+    public void _awaitTest()  {
+        await().untilAsserted(() -> {
+            assertThat(UserService.getUserAzureById(1).id, is(1));
+            assertThat(UserDao.getfindById(1).getId(), is(1));
+
+        });
+    }
+
 
 }
