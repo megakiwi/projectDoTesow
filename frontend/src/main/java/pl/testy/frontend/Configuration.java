@@ -10,4 +10,5 @@ public class Configuration {
     public static final String LOGIN = ENV.getString("login");
     public static final String PASSWORD = ENV.getString("password");
     public static final String URL = ENV.getString("baseUrl");
+    public static final String URL_REMOTE = ENV.getString("remoteUrl");
 }

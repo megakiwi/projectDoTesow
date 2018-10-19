@@ -1,0 +1,22 @@
+bo mamy plik konfuguracyjbt to w jankinsie
+General -> To zadanie jest sparametryzowane	-> Lista wyboru:  podajemy nazwe parmametru i jego możliwe wybory
+
+
+można cronem,
+
+
+GitHub hook trigger for GITScm polling -> trzeba jankins musi miec wyjscie na swiat.
+
+Build - > Globalne narzędzia do konfiguracji, trzeba mu powiedziec hdzie ma jave mavena i gita,
+Za kazdym razem wciakamy DODAJ.
+	JDK  -> odznaczamy 'Install automatically' i apisujemy name "java" i śiezka do jdk (bez bina)
+	GIT -> odznaczamy 'Install automatically' i nazwa "git" C:\Program Files\Git\cmd\git.exe
+	MAVEN -> odznaczamy 'Install automatically' i nazwa "maven" C:\apache-maven-3.5.4-bin\apache-maven-3.5.4
+	jak chcemy sprawdzic te ustawienia to w jankins -> zarzadzaj jenkinsem -> Globalne narzędzia do konfiguracji
+
+
+jesli chcemy aby githib informował jankensa, ze zostałao cos spushowane i jaknins poinien zbudować,
+to Webkkok, playloadURL i tutuaj
+https://urlJankisa/github-webhook, to ten url juz tam jest, to webhookie pozwalaja zewnetrzym serwisom byc
+poinformowanym POSTem, ze był w gicie push; jesli w jankinsie zrobimy crona co minute i on bedzie odpytywal
+githuba ale i tak bedzie co minute robil builda, wiec kicha, lepiej robic webhooka

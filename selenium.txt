@@ -1,0 +1,12 @@
+https://www.guru99.com/introduction-to-selenium-grid.html
+
+pierwsza komenda
+java -jar selenium-server-standalone-2.30.0.jar -role hub
+
+na http://localhost:4444/ działą mi już selenium
+
+teraz trzeba zainstalowac drwivera przegladarki na ktorej chcemy testowac, robimy to w nowym cmd:
+java -Dwebdriver.chrome.driver="chromedriver.exe" -jar selenium-server-standalone-3.14.0.jar -role webdriver -hub http://192.168.3.172:4444/grid/register -port 5566
+ten http://192.168.3.172:4444/ wzialam z tego co mi napisał na konsoli "java -jar selenium-server-standalone-2.30.0.jar -role hub"
+
+
